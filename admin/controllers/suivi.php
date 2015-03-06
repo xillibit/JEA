@@ -41,8 +41,11 @@ class JeaControllerSuivi extends JControllerLegacy
      */
     function featured()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=contacts');
+		}
 
         // Initialise variables.
         $user   = JFactory::getUser();
@@ -80,8 +83,11 @@ class JeaControllerSuivi extends JControllerLegacy
      */
     public function copy()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=suivi');
+		}
 
         // Initialise variables.
         $user	= JFactory::getUser();
@@ -104,8 +110,8 @@ class JeaControllerSuivi extends JControllerLegacy
 
         $this->setRedirect('index.php?option=com_jea&view=suivi');
     }
-    
-    
+
+
     public function import()
     {
         $app = JFactory::getApplication();
@@ -127,26 +133,26 @@ class JeaControllerSuivi extends JControllerLegacy
 
         $this->setRedirect('index.php?option=com_jea&view=import&layout=' . $type);
     }
-    
-    public function add(){      
+
+    public function add(){
       $app = JFactory::getApplication();
-      
+
       $task = $app->input->getCmd('task');
-            
+
       $app->setUserState( 'com_jea.add.suivi.task', $task );
-            
+
       $this->setRedirect('index.php?option=com_jea&view=suivi&layout=new');
     }
-    
+
     public function edit() {
       $app = JFactory::getApplication();
-      
+
       $task = $app->input->getCmd('task');
       $id = $app->input->getInt('id', 0 , 'int');
-            
+
       $app->setUserState( 'com_jea.add.suivi.task', $task );
       $app->setUserState( 'com_jea.add.suivi.id', $id );
-            
+
       $this->setRedirect('index.php?option=com_jea&view=suivi&layout=edit');
     }
 
@@ -160,11 +166,11 @@ class JeaControllerSuivi extends JControllerLegacy
     }
 
     public function cancelaction()
-    { 
-     $app = JFactory::getApplication(); 
-     
+    {
+     $app = JFactory::getApplication();
+
      $app->setUserState( 'com_jea.add.suivi.task', null );
-       
+
      $this->setRedirect('index.php?option=com_jea&view=suivi');
     }
 
@@ -172,64 +178,64 @@ class JeaControllerSuivi extends JControllerLegacy
     {
       $db = JFactory::getDBO();
       $app = JFactory::getApplication();
-      
+
       $date = JDate::getInstance();
-      
-      $type = $app->input->get('type', null, 'int'); 
+
+      $type = $app->input->get('type', null, 'int');
       $type_action = $app->input->get('type_action', null, 'int');
       $id_contact = $app->input->get('id_contact', 0, 'int');
       $id_property = $app->input->get('id_property', 0, 'int');
       $dateaction = $app->input->get('dateaction' , null, 'string');
       $description = $app->input->get('description' , null, 'string');
-      
-      $query = "INSERT INTO #__jea_suivi (type, type_action, id_contact, date, description) 
+
+      $query = "INSERT INTO #__jea_suivi (type, type_action, id_contact, date, description)
                 VALUES({$db->quote($type)},{$db->quote($type_action)},{$db->quote($id_contact)},{$db->quote($date->toSql())},{$db->quote($description)})";
       $db->setQuery($query);
       $db->query();
-      
+
       $app->enqueueMessage(JText::_('COM_JEA_LABEL_MESSAGE_SUIVI_ADDED_SUCCESSFULLY'));
-      
+
       $this->setRedirect('index.php?option=com_jea&view=suivi');
     }
-    
+
     public function edition()
     {
       $db = JFactory::getDBO();
       $app = JFactory::getApplication();
-            
+
       $id = $app->input->get('id', null, 'int');
       if ( $id > 0 ) {
-        $type = $app->input->get('type', null, 'int'); 
+        $type = $app->input->get('type', null, 'int');
         $type_action = $app->input->get('type_action', null, 'int');
         $id_contact = $app->input->get('id_contact', 0, 'int');
         $id_property = $app->input->get('id_property', 0, 'int');
         $dateaction = $app->input->get('dateaction' , null, 'string');
         $description = $app->input->get('description' , null, 'string');
-        
+
         $query = "UPDATE #__jea_suivi SET type={$db->quote($type)}, type_action={$db->quote($type_action)}, id_contact={$db->quote($id_contact)},id_property={$db->quote($id_property)}, date={$db->quote($dateaction)}, description={$db->quote($description)} WHERE id={$id}";
         $db->setQuery($query);
         $db->query();
-        
+
         $app->enqueueMessage(JText::_('COM_JEA_LABEL_MESSAGE_SUIVI_UPDATED_SUCCESSFULLY'));
-        
-        $this->setRedirect('index.php?option=com_jea&view=suivi');      
-      }   
+
+        $this->setRedirect('index.php?option=com_jea&view=suivi');
+      }
     }
-    
+
     public function delete(){
         $db = JFactory::getDBO();
         $app = JFactory::getApplication();
-            
+
         $id = $app->input->get('cid', array(), 'array');
         $id = array_shift($id);
-                 
+
         $query = "DELETE FROM #__jea_suivi WHERE id={$id}";
         $db->setQuery($query);
         $db->query();
-        
+
         $app->enqueueMessage(JText::_('COM_JEA_LABEL_MESSAGE_SUIVI_DELETED_SUCCESSFULLY'));
-        
+
         $this->setRedirect('index.php?option=com_jea&view=suivi');
-    } 
+    }
 }
 

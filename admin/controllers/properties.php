@@ -41,8 +41,11 @@ class JeaControllerProperties extends JControllerAdmin
      */
     function featured()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=properties');
+		}
 
         // Initialise variables.
         $user   = JFactory::getUser();
@@ -80,8 +83,11 @@ class JeaControllerProperties extends JControllerAdmin
      */
     public function copy()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=properties');
+		}
 
         // Initialise variables.
         $user	= JFactory::getUser();
@@ -104,8 +110,8 @@ class JeaControllerProperties extends JControllerAdmin
 
         $this->setRedirect('index.php?option=com_jea&view=properties');
     }
-    
-    
+
+
     public function import()
     {
         $app = JFactory::getApplication();

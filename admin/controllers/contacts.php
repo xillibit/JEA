@@ -41,8 +41,11 @@ class JeaControllerContacts extends JControllerAdmin
      */
     function featured()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=contacts');
+		}
 
         // Initialise variables.
         $user   = JFactory::getUser();
@@ -80,8 +83,11 @@ class JeaControllerContacts extends JControllerAdmin
      */
     public function copy()
     {
-        // Check for request forgeries
-        JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			$this->app->enqueueMessage ( JText::_('JINVALID_TOKEN'), 'error' );
+			$this->app->redirect('index.php?option=com_jea&view=contacts');
+		}
 
         // Initialise variables.
         $user	= JFactory::getUser();

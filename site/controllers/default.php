@@ -41,7 +41,7 @@ class JeaControllerDefault extends JControllerLegacy
                 if ($params->get('login_behavior', 'before') == 'before') {
                     $access = $user->authorise('core.create', 'com_jea');
                 } else {
-                    // If the login_behavior is set after save, 
+                    // If the login_behavior is set after save,
                     // so all users can see the property form.
                     $access = true;
                 }
@@ -62,10 +62,10 @@ class JeaControllerDefault extends JControllerLegacy
 
     public function sendContactForm()
     {
-        // Check for request forgeries
-        if (!JRequest::checkToken()) {
-            return $this->setRedirect($returnURL, JText::_('JINVALID_TOKEN'), 'warning');
-        }
+		// Check for request forgeries
+		if (!JSession::checkToken()) {
+			return $this->setRedirect($returnURL, JText::_('JINVALID_TOKEN'), 'warning');
+		}
 
         $model = $this->getModel('Property', 'JeaModel');
         $returnURL = $model->getState('contact.propertyURL');
