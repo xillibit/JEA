@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form>
+	<fieldset>		
+		<field name="contacttitre" type="titre" label="COM_JEA_FIELD_CONTACT_TITRE_LABEL" class="inputbox" />
+    <field name="contacttype" type="typelist" label="COM_JEA_FIELD_CONTACT_TYPE_LIST_LABEL" class="inputbox" />
+    <field name="contactname" type="text" label="COM_JEA_FIELD_CONTACT_NAME" description="COM_JEA_FIELD_CONTACT_NAME_DESC" class="inputbox" size="25" />
+		<field name="lastname" type="text" label="COM_JEA_FIELD_CONTACT_LASTNAME" description="COM_JEA_FIELD_CONTACT_LASTNAME_DESC" class="inputbox" size="25" />
+		<field name="adress" type="text" label="COM_JEA_FIELD_CONTACT_ADRESS" description="COM_JEA_FIELD_CONTACT_ADRESS_DESC" class="inputbox" size="40" />		
+		<field name="code_postal" type="text" label="COM_JEA_FIELD_CONTACT_CODEPOSTAL" description="COM_JEA_FIELD_CONTACT_CODEPOSTAL_DESC" class="inputbox" />
+		<field name="ville" type="text" label="COM_JEA_FIELD_CONTACT_VILLE" description="COM_JEA_FIELD_CONTACT_VILLE_DESC" class="inputbox" />
+		<field name="telephone" type="text" label="COM_JEA_FIELD_CONTACT_PHONE" description="COM_JEA_FIELD_CONTACT_PHONE_DESC" class="inputbox" />
+    <field name="mail" type="text" label="COM_JEA_FIELD_CONTACT_MAIL" description="COM_JEA_FIELD_CONTACT_MAIL_DESC" class="inputbox" />	
+	</fieldset>
+</form>

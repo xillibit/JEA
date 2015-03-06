@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_JEA_PROPERTIES_SEARCHMAP_LAYOUT_TITLE">
+		<message>
+			<![CDATA[COM_JEA_PROPERTIES_SEARCHMAP_LAYOUT_DESC]]>
+		</message>
+	</layout>
+
+		<fields name="params">
+			<fieldset name="basic" label="COM_JEA_MENU_PARAMS_LABEL">
+			
+				<field name="searchform_default_map_area" type="text" default="" label="COM_JEA_FIELD_SEARCHFORM_DEFAULT_MAP_AREA_LABEL" description="COM_JEA_FIELD_SEARCHFORM_DEFAULT_MAP_AREA_DESC" size="20" />
+				<field name="searchform_map_width" type="text" default="" label="COM_JEA_FIELD_SEARCHFORM_MAP_WIDTH_LABEL" description="COM_JEA_FIELD_SEARCHFORM_MAP_WIDTH_DESC" size="5" />
+				<field name="searchform_map_height" type="text" default="" label="COM_JEA_FIELD_SEARCHFORM_MAP_HEIGHT_LABEL" description="COM_JEA_FIELD_SEARCHFORM_MAP_HEIGHT_DESC" size="5" />
+	
+				<field name="searchform_transaction_type" type="list" label="COM_JEA_FIELD_TRANSACTION_TYPE_LABEL" description="COM_JEA_FIELD_SEARCHFORM_TRANSACTION_TYPE_DESC">
+					<option value="">JALL</option>
+					<option value="SELLING">COM_JEA_OPTION_SELLING</option>
+					<option value="RENTING">COM_JEA_OPTION_RENTING</option>
+				</field>
+	
+				<field name="searchform_show_departments" type="list" label="COM_JEA_FIELD_SEARCHFORM_DEPARTMENTS_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+	
+				<field name="searchform_show_towns" type="list" label="COM_JEA_FIELD_SEARCHFORM_TOWNS_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_areas" type="list" label="COM_JEA_FIELD_SEARCHFORM_AREAS_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_budget" type="list" label="COM_JEA_FIELD_SEARCHFORM_BUDGET_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_living_space" type="list" label="COM_JEA_FIELD_SEARCHFORM_LIVING_SPACE_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_land_space" type="list" label="COM_JEA_FIELD_SEARCHFORM_LAND_SPACE_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_number_of_rooms" type="list" label="COM_JEA_FIELD_SEARCHFORM_NUMBER_OF_ROOMS_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_number_of_bedrooms" type="list" label="COM_JEA_FIELD_SEARCHFORM_NUMBER_OF_BEDROOMS_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field name="searchform_show_amenities" type="list" label="COM_JEA_FIELD_SEARCHFORM_AMENITIES_LABEL">
+					<option value="">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+			</fieldset>
+		</fields>
+</metadata>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>jea</name>
+	<author>Sylvain Philip</author>
+	<creationDate>January 2013</creationDate>
+	<authorEmail>contact@sphilip.com</authorEmail>
+	<authorUrl>www.sphilip.com</authorUrl>
+	<copyright>Copyright (C) PHILIP Sylvain. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>3.2</version>
+	<description>Easy real estate Ads management</description>
+
+	<!-- Runs on install/uninstall/update -->
+	<scriptfile>script.php</scriptfile>
+
+	<!-- Install / Uninstall Database Section -->
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<!-- Runs on update-->
+	<update> 
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<!-- Frontend -->
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>language</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<filename>index.html</filename>
+		<filename>jea.php</filename>
+		<filename>router.php</filename>
+	</files>
+
+	<!-- Media files -->
+	<media destination="com_jea" folder="media" >
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+	</media>
+
+	<!-- Backend -->
+	<administration>
+		<menu img="../media/com_jea/images/menu/icon-16-jea.png" >Joomla Estate Agency</menu>
+		<submenu>
+			<menu img="icon" view="properties">com_jea_properties</menu>
+			<menu img="icon" view="features">com_jea_features</menu>
+			<menu img="icon" view="tools">com_jea_tools</menu>
+		</submenu>
+
+		<files folder="admin">
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>index.html</filename>
+			<filename>jea.php</filename>
+		</files>
+	</administration>
+
+	<!-- Updateserver definition -->
+	<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" priority="1" name="JEA Update Site">http://jea.sphilip.com/update/com_jea.xml</server>
+	</updateservers>
+</extension>

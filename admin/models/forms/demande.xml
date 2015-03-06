@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form>
+	<fieldset>
+    <field name="id_properties" type="demandepropertiesid" label="COM_JEA_FIELD_DEMANDE_PROPERTIESID_LABEL" class="inputbox" />
+    <field name="id_contact" type="demandecontactid" label="COM_JEA_FIELD_DEMANDE_CONTACT_LABEL" class="inputbox" />		
+		<field name="activite" type="text" label="COM_JEA_FIELD_DEMANDE_ACTIVITE_LABEL" description="COM_JEA_FIELD_DEMANDE_ACTIVITE_LABEL_DESC" class="inputbox" />
+    <field name="description" type="textarea" label="COM_JEA_FIELD_DEMANDE_DESCRIPTION_LABEL" description="COM_JEA_FIELD_DEMANDE_DESCRIPTION_LABEL_DESC" rows="5" cols="5" />
+    <field name="lieu_recherche" type="text" label="COM_JEA_FIELD_DEMANDE_LIEU_RECHERCHE" description="COM_JEA_FIELD_DEMANDE_LIEU_RECHERCHE_DESC" class="inputbox" size="25" />
+		<field name="budget" type="text" label="COM_JEA_FIELD_DEMANDE_BUDGET" description="COM_JEA_FIELD_DEMANDE_BUDGET_DESC" class="inputbox" size="25" />
+		<field name="etat" type="demandeetat" label="COM_JEA_FIELD_DEMANDE_ETAT" description="COM_JEA_FIELD_DEMANDE_ETAT_DESC" class="inputbox" size="40" />		
+		<field name="date_realise" type="calendar" default="0000-00-00" label="COM_JEA_FIELD_DEMANDE_DATE_REALISE" description="COM_JEA_FIELD_DEMANDE_DATE_REALISE_DESC" format="%d-%m-%Y" />       
+		<field name="confidentielle" type="demandeconfidentialite" label="COM_JEA_FIELD_DEMANDE_CONFIDENTIALITE" description="COM_JEA_FIELD_DEMANDE_CONFIDENTIALITE_DESC" class="inputbox" />			
+	</fieldset>
+</form>
