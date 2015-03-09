@@ -32,12 +32,12 @@ JHtml::stylesheet('media/com_jea/css/jea.admin.css');
   <div style="height: 300px; float: left; margin-right: 50px;">
     <img src="../media/com_jea/images/logo.png" alt="logo.png" />
   </div>
-    
+
   <div style="height: 300px">
     <p><strong>Joomla Estate Agency <?php echo $this->getVersion() ?> </strong></p>
 
     <p>
-      <a href="http://joomlacode.org/gf/project/jea/" target="_blank"><?php echo JText::_('COM_JEA_PROJECT_HOME') ?></a>
+      <a href="https://github.com/xillibit/JEA" target="_blank"><?php echo JText::_('COM_JEA_PROJECT_HOME') ?></a>
     </p>
 
     <p>
