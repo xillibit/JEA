@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require JPATH_COMPONENT.DS.'helpers'.DS.'jea.php';
+require JPATH_COMPONENT . '/helpers/jea.php';
 
 /**
  * View to list properties.
@@ -54,11 +54,11 @@ class JeaViewSuivi extends JViewLegacy
         $db = JFactory::getDBO();
         $query = "SELECT * FROM #__jea_contacts WHERE id IN ({$contact_id_list})";
         $db->setQuery($query);
-        $this->contacts_objects = $db->loadObjectList('id');                 
+        $this->contacts_objects = $db->loadObjectList('id');
 
         // Get properties name
         $property_id_list = implode(',',$property_id_list);
-        
+
         $query = "SELECT * FROM #__jea_properties WHERE id IN ({$property_id_list})";
         $db->setQuery($query);
         $this->properties_objects = $db->loadObjectList('id');
@@ -70,23 +70,23 @@ class JeaViewSuivi extends JViewLegacy
         // On charge la bonne toolbar
         $app = JFactory::getApplication();
         $task = $app->getUserState('com_jea.add.suivi.task');
-        
-        $this->contact_list = $this->get('Contacts'); 
+
+        $this->contact_list = $this->get('Contacts');
         $this->types_list = $this->get('Types');
         $this->typesactions_list = $this->get('TypesAction');
         $this->properties = $this->get('Properties');
-                        
+
         if ( $task=='add' ) {
-          $this->addToolbarNew();          
+          $this->addToolbarNew();
         } elseif ( $task=='edit' ) {
-          $this->addToolbarEdit();          
-        } else {          
+          $this->addToolbarEdit();
+        } else {
           $this->addToolbar();
-        }         
+        }
 
         parent::display($tpl);
     }
-        
+
     /**
      * Add the page title and toolbar for default view.
      *
@@ -106,7 +106,7 @@ class JeaViewSuivi extends JViewLegacy
         if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own'))) {
             JToolBarHelper::editList('edit');
         }
-                
+
         if ($canDo->get('core.delete')) {
             JToolBarHelper::divider();
             JToolBarHelper::deleteList(JText::_('COM_JEA_MESSAGE_CONFIRM_DELETE'), 'delete');
@@ -117,27 +117,27 @@ class JeaViewSuivi extends JViewLegacy
             JToolBarHelper::preferences('com_jea');
         }*/
     }
-    
+
     /**
      * Add the page title and toolbar for edit view.
      *
      */
-     protected function addToolbarEdit() 
+     protected function addToolbarEdit()
      {
       JToolBarHelper::title( JText::_('COM_JEA_SUIVI_MANAGEMENT_EDIT'), 'jea.png' );
-            
+
 			JToolBarHelper::save('edition');
       JToolBarHelper::cancel('cancelaction', 'JTOOLBAR_CLOSE');
      }
-     
+
      /**
      * Add the page title and toolbar for new view.
      *
      */
-     protected function addToolbarNew() 
+     protected function addToolbarNew()
      {
       JToolBarHelper::title( JText::_('COM_JEA_SUIVI_MANAGEMENT_NEW'), 'jea.png' );
-      
+
       JToolBarHelper::apply('apply');
 			JToolBarHelper::save('save');
       JToolBarHelper::cancel('cancelaction', 'JTOOLBAR_CLOSE');

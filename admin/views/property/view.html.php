@@ -14,7 +14,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require JPATH_COMPONENT.DS.'helpers'.DS.'jea.php';
+require JPATH_COMPONENT . '/helpers/jea.php';
 
 /**
  * View to edit property.
@@ -68,7 +68,7 @@ class JeaViewProperty extends JViewLegacy
 
         $title = JText::_('COM_JEA_PROPERTIES_MANAGEMENT') . ' : ';
         $title .= $isNew ? JText::_( 'JACTION_CREATE' ) : JText::_( 'JACTION_EDIT' );
-        
+
         JToolBarHelper::title( $title , 'jea.png' ) ;
 
         // Built the actions for new and existing records.

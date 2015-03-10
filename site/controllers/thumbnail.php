@@ -27,9 +27,9 @@ class JeaControllerThumbnail extends JControllerLegacy
 {
 
     public function create()
-    {   
+    {
         $output = '';
-        
+
         $size = JRequest::getCmd('size', '');
         if (!in_array($size, array('min', 'medium'))) {
             throw new Exception('The image size is not recognized', 500);
@@ -37,15 +37,15 @@ class JeaControllerThumbnail extends JControllerLegacy
 
         $image = JRequest::getVar('image', '');
         $id = JRequest::getInt('id', 0);
-        $imagePath = JPATH_ROOT.DS.'images'.DS.'com_jea'.DS.'images'.DS.$id.DS.$image;
-        $thumbDir  = JPATH_ROOT.DS.'images'.DS.'com_jea'.DS.'thumb-'.$size;
-        $thumbPath = $thumbDir.DS.$id.'-'.$image;
+        $imagePath = JPATH_ROOT . '/images/com_jea/images/' . $id . '/' . $image;
+        $thumbDir  = JPATH_ROOT . '/images/com_jea/thumb-'.$size;
+        $thumbPath = $thumbDir . '/' . $id.'-'.$image;
 
         if (file_exists($thumbPath)) {
                 $output = readfile($thumbPath);
-                
+
         } elseif (file_exists($imagePath)) {
-            
+
             if (!JFolder::exists($thumbPath)) {
                 JFolder::create($thumbDir);
             }
@@ -63,7 +63,7 @@ class JeaControllerThumbnail extends JControllerLegacy
             $quality = (int) $params->get('jpg_quality' , 90) ;
             $cropThumbnails = (bool) $params->get('crop_thumbnails', 0);
             $JImage = new JImage($imagePath);
-            
+
             if ($cropThumbnails) {
                 $thumb = $JImage->resize($width, $height, true, JImage::SCALE_OUTSIDE);
                 $left = $thumb->getWidth() > $width ? intval(($thumb->getWidth() - $width) / 2) : 0;

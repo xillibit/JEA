@@ -67,7 +67,7 @@ class JeaModelFeaturelist extends JModelList
         foreach ($xmlFiles as $filename) {
             if (preg_match('/^[0-9]{2}-([a-z]*).xml/', $filename, $matches)) {
                 if ($feature == $matches[1]) {
-                    $form = simplexml_load_file($xmlPath.DS.$filename);
+                    $form = simplexml_load_file($xmlPath . '/' . $filename);
                     $this->setState('feature.table', (string) $form['table']);
 
                     if (isset($form['filters'])) {

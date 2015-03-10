@@ -81,7 +81,7 @@ class JeaUpload
         $rawUploaded = JRequest::getVar($name, array(), 'files', 'array');
 
         if (is_array($rawUploaded['name'])) {
-             
+
             $fields = array('name', 'type', 'tmp_name', 'error', 'size');
             $arrUploaded = array();
             $keys = array_keys($rawUploaded['name']);
@@ -96,14 +96,14 @@ class JeaUpload
                 $uploaded->key = $key;
                 $arrUploaded[] = $uploaded;
             }
-             
+
             return $arrUploaded;
 
         } else { // Single post
             $uploaded = new JeaUpload($rawUploaded);
             $uploaded->key = $name;
             return $uploaded;
-             
+
         }
     }
 
@@ -198,12 +198,12 @@ class JeaUpload
         if (!JFolder::exists($dir)) {
             $this->_errors[] = 'COM_JEA_UPLOAD_DESTINATION_DIRECTORY_DOESNT_EXISTS';
         }
-         
+
         if (!is_writable($dir)) {
             $this->_errors[] = 'COM_JEA_UPLOAD_DESTINATION_DIRECTORY_NOT_WRITABLE';
         }
 
-        $file = $dir.DS.$this->name;
+        $file = $dir . '/' . $this->name;
 
         if (JFile::exists($file)) {
             if ($overwrite === false) {

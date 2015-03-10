@@ -15,7 +15,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport('joomla.application.component.modeladmin');
 jimport( 'joomla.filesystem.folder' );
 
-require_once JPATH_COMPONENT.DS.'tables'.DS.'features.php';
+require_once JPATH_COMPONENT . '/tables/features.php';
 
 /**
  * Feature model class.
@@ -50,7 +50,7 @@ class JeaModelFeature extends JModelAdmin
      */
     public function populateState()
     {
-        // Be careful to not call parent::populateState() because this will cause an 
+        // Be careful to not call parent::populateState() because this will cause an
         // infinite call of this method in JeaModelFeature::getTable()
 
         $feature = JRequest::getCmd('feature');
@@ -63,7 +63,7 @@ class JeaModelFeature extends JModelAdmin
         foreach ($xmlFiles as $filename) {
             if (preg_match('/^[0-9]{2}-([a-z]*).xml/', $filename, $matches)) {
                 if ($feature == $matches[1]) {
-                    $form = simplexml_load_file($xmlPath.DS.$filename);
+                    $form = simplexml_load_file($xmlPath . '/' . $filename);
                     $this->setState('feature.table', (string) $form['table']);
                     $this->setState('feature.form', $xmlPath.$filename);
                 }

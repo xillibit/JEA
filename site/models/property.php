@@ -147,17 +147,17 @@ class JeaModelProperty extends JModelLegacy
 
         if (!empty($images) && is_array($images)) {
 
-            $imagePath = JPATH_ROOT.DS.'images'.DS.'com_jea';
+            $imagePath = JPATH_ROOT . '/images/com_jea';
             $baseURL = JURI::root(true);
 
             foreach ($images as $k => $image) {
 
-                if (file_exists($imagePath.DS.'images'.DS.$data->id.DS.$image->name)) {
+                if (file_exists($imagePath . '/images/' . $data->id . '/' . $image->name)) {
 
                     $image->URL = $baseURL.'/images/com_jea/images/'.$data->id.'/'.$image->name;
 
                     // get thumb min URL
-                    if (file_exists($imagePath.DS.'thumb-min'.DS.$data->id.'-'.$image->name)) {
+                    if (file_exists($imagePath . '/thumb-min/' . $data->id.'-'.$image->name)) {
                         // If the thumbnail already exists, display it directly
                         $image->minURL = $baseURL.'/images/com_jea/thumb-min/'.$data->id.'-'.$image->name;
 
@@ -168,7 +168,7 @@ class JeaModelProperty extends JModelLegacy
                     }
 
                     // get thumb medium URL
-                    if (file_exists($imagePath.DS.'thumb-medium'.DS.$data->id.'-'.$image->name)) {
+                    if (file_exists($imagePath . '/thumb-medium/' . $data->id.'-'.$image->name)) {
                         // If the thumbnail already exists, display it directly
                         $image->mediumURL = $baseURL.'/images/com_jea/thumb-medium/'.$data->id.'-'.$image->name;
 
@@ -266,7 +266,7 @@ class JeaModelProperty extends JModelLegacy
     public function sendContactForm()
     {
         jimport('joomla.mail.helper');
-         
+
         $app = JFactory::getApplication();
         // Get a JMail instance
         $mailer = JFactory::getMailer();

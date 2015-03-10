@@ -17,7 +17,7 @@ jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.archive');
 
-require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'upload.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/helpers/upload.php';
 
 
 /**
@@ -39,7 +39,7 @@ class JeaControllerFeatures extends JControllerLegacy
 
         if (!empty($features)) {
             $config   = JFactory::getConfig();
-            $exportPath = $config->get('tmp_path').DS.'jea_export';
+            $exportPath = $config->get('tmp_path') . '/jea_export';
 
             if (JFolder::create($exportPath) === false) {
                 $msg= JText::_('JLIB_FILESYSTEM_ERROR_FOLDER_CREATE').' : '.$exportPath;
@@ -55,17 +55,17 @@ class JeaControllerFeatures extends JControllerLegacy
                     if (preg_match('/^[0-9]{2}-([a-z]*).xml/', $filename, $matches)) {
                         $feature = $matches[1];
                         if (in_array($feature, $features)) {
-                            $form = simplexml_load_file($xmlPath.DS.$filename);
+                            $form = simplexml_load_file($xmlPath. '/' .$filename);
                             $table = (string) $form['table'];
                             $files[] = array(
-                                'data' => $model->getCSVData($table), 
+                                'data' => $model->getCSVData($table),
                                 'name' => $table.'.csv'
                             );
                         }
                     }
                 }
 
-                $zipFile = $exportPath.DS.'jea_export_'.uniqid().'.zip';
+                $zipFile = $exportPath . '/jea_export_'.uniqid().'.zip';
                 $zip = JArchive::getAdapter('zip');
                 $zip->create($zipFile, $files);
 
@@ -108,7 +108,7 @@ class JeaControllerFeatures extends JControllerLegacy
             if (preg_match('/^[0-9]{2}-([a-z]*).xml/', $filename, $matches)) {
                 $feature = $matches[1];
                 if (!isset($tables[$feature])) {
-                    $form = simplexml_load_file($xmlPath.DS.$filename);
+                    $form = simplexml_load_file($xmlPath . '/' . $filename);
                     $tables[$feature]= (string) $form['table'];
                 }
             }

@@ -12,8 +12,6 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-
 // Include dependancies
 jimport('joomla.application.component.controller');
 
@@ -29,15 +27,15 @@ $view = strtolower ( JRequest::getWord ( 'view' ) );
 
 if ( $view == 'suivi' ) {
   $controller = 'JeaController' . ucfirst ( $view );
-    
+
   $path = JPATH_COMPONENT . "/controllers/{$view}.php";
   require_once $path;
-    
-  $instance = new $controller ();  
+
+  $instance = new $controller ();
   $instance->execute(JRequest::getCmd('task'));
   $instance->redirect();
 } else {
-  $controller = JControllerLegacy::getInstance('jea');  
+  $controller = JControllerLegacy::getInstance('jea');
   $controller->execute($input->getCmd('task'));
   $controller->redirect();
-}  
+}

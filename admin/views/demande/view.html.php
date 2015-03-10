@@ -14,7 +14,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require JPATH_COMPONENT.DS.'helpers'.DS.'jea.php';
+require JPATH_COMPONENT . '/helpers/jea.php';
 
 /**
  * View to edit property.
@@ -61,11 +61,11 @@ class JeaViewDemande extends JViewLegacy
         JRequest::setVar('hidemainmenu', true);
         $user       = JFactory::getUser();
         $userId     = $user->get('id');
-        $isNew      = ($this->item->id == 0);         
+        $isNew      = ($this->item->id == 0);
 
         $title = JText::_('COM_JEA_CONTACT_MANAGEMENT') . ' : ';
         $title .= $isNew ? JText::_( 'JACTION_CREATE' ) : JText::_( 'JACTION_EDIT' );
-        
+
         JToolBarHelper::title( $title , 'jea.png' ) ;
 
         // Built the actions for new and existing records.
@@ -73,7 +73,7 @@ class JeaViewDemande extends JViewLegacy
         JToolBarHelper::apply('demande.apply');
         JToolBarHelper::save('demande.save');
         JToolBarHelper::save2new('demande.save2new');
-        JToolBarHelper::cancel('demande.cancel');        
+        JToolBarHelper::cancel('demande.cancel');
     }
 
 }

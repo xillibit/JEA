@@ -17,7 +17,7 @@ jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
 
-require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'upload.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/helpers/upload.php';
 
 /**
  * Property model class.
@@ -135,15 +135,15 @@ class JeaModelContact extends JModelAdmin
         foreach ($images as $row) {
             $imageNames[$row->name] = $row->name;
         }
-         
-        $baseUploadDir = JPATH_ROOT.DS.'images'.DS.'com_jea'.DS.'images' ;
+
+        $baseUploadDir = JPATH_ROOT . '/images/com_jea/images' ;
         $validExtensions = array('jpg','JPG','jpeg','JPEG','gif','GIF','png','PNG') ;
 
         if (!JFolder::exists($baseUploadDir)) {
             JFolder::create($baseUploadDir);
         }
 
-        $uploadDir = $baseUploadDir . DS . $item->id;
+        $uploadDir = $baseUploadDir . '/' . $item->id;
 
         if (is_array($upload)) {
             foreach ($upload as $file) {

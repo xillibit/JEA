@@ -17,7 +17,7 @@ jimport('joomla.application.component.model');
 jimport('joomla.error.log');
 jimport('joomla.utilities.date');
 
-require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'propertyInterface.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/propertyInterface.php';
 
 /**
  * Interface model class.
@@ -346,7 +346,7 @@ abstract class JeaModelInterface extends JModelLegacy
     public function getLogsContent()
     {
         $path = JFactory::getConfig()->get('log_path');
-        $logFile = $path.DS.$this->_log_file;
+        $logFile = $path . '/' . $this->_log_file;
         if (JFile::exists($logFile)) {
             return file_get_contents($logFile);
         }
@@ -361,7 +361,7 @@ abstract class JeaModelInterface extends JModelLegacy
     public function deleteLogs()
     {
         $path = JFactory::getConfig()->get('log_path');
-        $logFile = $path.DS.$this->_log_file;
+        $logFile = $path . '/' . $this->_log_file;
         if(JFile::exists($logFile)) {
             return JFile::delete($logFile);
         }

@@ -55,7 +55,7 @@ class JFormFieldGallery extends JFormField
         }
 
         $output .= "\n";
-        
+
         //alert & return if GD library for PHP is not enabled
         if (!extension_loaded('gd')) {
             $output .= '<strong>WARNING: </strong>The <a href="http://php.net/manual/en/book.image.php" target="_blank">GD library for PHP</a> was not found. Ensure to install it';
@@ -75,12 +75,12 @@ class JFormFieldGallery extends JFormField
 
         $baseURL = JURI::root(true);
         $imgBaseURL  = $baseURL.'/images/com_jea/images/' . $propertyId;
-        $imgBasePath = JPATH_ROOT.DS.'images'.DS.'com_jea'.DS.'images'.DS.$propertyId;
+        $imgBasePath = JPATH_ROOT . '/images/com_jea/images/' . $propertyId;
 
         if (!empty($images)) {
             $output .= "<ul class=\"gallery\">\n";
             foreach ($images as $k => $image) {
-                $imgPath = $imgBasePath.DS.$image->name;
+                $imgPath = $imgBasePath . '/' . $image->name;
                 try {
                     $infos = JImage::getImageFileProperties($imgPath);
                 } catch (Exception $e) {
@@ -90,13 +90,13 @@ class JFormFieldGallery extends JFormField
 
                 $thumbName = 'thumb-admin-'. $image->name;
                 // Create the thumbnail
-                if (!file_exists($imgBasePath.DS.$thumbName)) {
+                if (!file_exists($imgBasePath . '/' . $thumbName)) {
                   try {
                     // This is where the JImage will be used, so only create it here
                     $JImage = new JImage($imgPath);
                     $thumb = $JImage->resize(150, 90);
                     $thumb->crop(150, 90, 0, 0);
-                    $thumb->toFile($imgBasePath.DS.$thumbName);
+                    $thumb->toFile($imgBasePath . '/' . $thumbName);
                     // To avoid memory overconsumption, destroy the JImage now that we don't need it anymore
                     if (method_exists( $JImage , 'destroy')) {
                        $JImage->destroy();
@@ -191,7 +191,7 @@ class JFormFieldGallery extends JFormField
                             }
                         });
                     });
-                    
+
                 })"
             );
         }

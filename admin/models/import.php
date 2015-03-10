@@ -15,7 +15,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 
-require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'interface.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/interface.php';
 
 /**
  * Import model class.
@@ -68,12 +68,12 @@ class JeaModelImport extends JeaModelInterface
             throw new Exception(JText::sprintf('COM_JEA_DIRECTORY_NOT_FOUND', $path));
         }
 
-        if (!JFile::exists($path.DS.'configuration.php')) {
+        if (!JFile::exists($path . '/configuration.php')) {
             throw new Exception(JText::_('COM_JEA_JOOMLA_CONFIGURATION_FILE_NOT_FOUND'));
         }
 
         // Get The config file
-        $confCode = file_get_contents($path.DS.'configuration.php');
+        $confCode = file_get_contents($path . '/configuration.php');
         $confCode = str_replace('JConfig', 'JOldConfig', $confCode);
         $tmpConf = JFactory::getConfig()->get('tmp_path') . '/configuration.old.php';
         JFile::write($tmpConf, $confCode);
@@ -84,11 +84,11 @@ class JeaModelImport extends JeaModelInterface
         JFile::delete($tmpConf);
 
         $options = array(
-            'driver' => $conf->dbtype, 
-            'host' => $conf->host, 
-            'user' => $conf->user, 
-            'password' => $conf->password, 
-            'database' => $conf->db, 
+            'driver' => $conf->dbtype,
+            'host' => $conf->host,
+            'user' => $conf->user,
+            'password' => $conf->password,
+            'database' => $conf->db,
             'prefix' => $conf->dbprefix
         );
 
@@ -193,7 +193,7 @@ class JeaModelImport extends JeaModelInterface
             $properties[$row->ref] = $property;
         }
 
-         
+
         return $properties;
     }
 

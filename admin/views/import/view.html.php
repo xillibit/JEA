@@ -15,7 +15,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view');
 
-require JPATH_COMPONENT.DS.'helpers'.DS.'jea.php';
+require JPATH_COMPONENT . '/helpers/jea.php';
 
 /**
  * Import View
@@ -59,7 +59,7 @@ class JeaViewImport extends JViewLegacy
                 break;
              case 'csv':
                 JToolBarHelper::title( JText::_('COM_JEA_IMPORT_FROM_CSV'), 'jea.png' );
-                break;   
+                break;
         }
     }
 

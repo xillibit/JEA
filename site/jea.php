@@ -12,8 +12,6 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-
 // Include dependancies
 jimport('joomla.application.component.controller');
 
@@ -27,16 +25,16 @@ if ($task == '') {
     $input->set('task', 'default.display');
 }
 
-if ($task == 'properties.sendcontactform' || $task == 'sendMailOwner' ) {  
+if ($task == 'properties.sendcontactform' || $task == 'sendMailOwner' ) {
   $view = strtolower ( JRequest::getWord ( 'view' ) );
   $controller = 'JeaController' . ucfirst ( $view );
-  
+
   $path = JPATH_COMPONENT . "/controllers/{$view}.php";
   require_once $path;
-  
+
   $instance = new $controller ();
   $instance->execute(JRequest::getCmd('task'));
-  $instance->redirect();     
+  $instance->redirect();
 }
 
 $controller = JControllerLegacy::getInstance('jea');
@@ -45,6 +43,6 @@ if ((float) JVERSION > 3) {
 }
 
 $controller->execute($input->getCmd('task'));
-$controller->redirect(); 
+$controller->redirect();
 
 

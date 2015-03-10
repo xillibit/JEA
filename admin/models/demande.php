@@ -43,7 +43,7 @@ class JeaModelDemande extends JModelAdmin
     public function getForm($data = array(), $loadData = true)
     {
         $app = JFactory::getApplication();
-        
+
         $dispatcher = JDispatcher::getInstance();
         // Include the jea plugins for the on after load property form events.
         JPluginHelper::importPlugin('jea');
@@ -58,7 +58,7 @@ class JeaModelDemande extends JModelAdmin
         $id =  $jinput->get('id', 0);
         $user = JFactory::getUser();
         $item = $this->getItem($id);
-        
+
         $app->setUserState( "com_jea.demande_item", $item );
 
         // Remove deposit field if transaction type is not SELLING
@@ -136,15 +136,15 @@ class JeaModelDemande extends JModelAdmin
         foreach ($images as $row) {
             $imageNames[$row->name] = $row->name;
         }
-         
-        $baseUploadDir = JPATH_ROOT.DS.'images'.DS.'com_jea'.DS.'images' ;
+
+        $baseUploadDir = JPATH_ROOT . '/images/com_jea/images' ;
         $validExtensions = array('jpg','JPG','jpeg','JPEG','gif','GIF','png','PNG') ;
 
         if (!JFolder::exists($baseUploadDir)) {
             JFolder::create($baseUploadDir);
         }
 
-        $uploadDir = $baseUploadDir . DS . $item->id;
+        $uploadDir = $baseUploadDir . '/' . $item->id;
 
         if (is_array($upload)) {
             foreach ($upload as $file) {
