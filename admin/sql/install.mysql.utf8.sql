@@ -44,6 +44,74 @@ CREATE TABLE IF NOT EXISTS `#__jea_conditions` (
 -- --------------------------------------------------------
 
 -- 
+-- Table schema `#__jea_contacts`
+-- 
+
+CREATE TABLE IF NOT EXISTS `#__jea_contacts` (
+  `id` int(11) NOT NULL,
+  `contacttitre` int(11) NOT NULL,
+  `contactname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `adress` varchar(255) NOT NULL,
+  `code_postal` int(7) NOT NULL,
+  `ville` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `mobile` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `#__jea_contacts_rel`
+--
+
+CREATE TABLE IF NOT EXISTS `#__jea_contacts_rel` (
+  `id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `property_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `#__jea_demandes`
+--
+
+CREATE TABLE IF NOT EXISTS `#__jea_demandes` (
+  `id` int(11) NOT NULL,
+  `etat` int(11) NOT NULL,
+  `date_realise` date NOT NULL DEFAULT '0000-00-00',
+  `confidentielle` int(11) NOT NULL,
+  `id_contact` int(11) NOT NULL,
+  `activite` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `lieu_recherche` varchar(100) NOT NULL,
+  `budget` float NOT NULL,
+  `nom_contact` varchar(50) NOT NULL,
+  `prenom_contact` varchar(50) NOT NULL,
+  `adresse_mail_contact` varchar(100) NOT NULL,
+  `telephone_contact` varchar(20) NOT NULL,
+  `date_demande` date NOT NULL DEFAULT '0000-00-00',
+  `type` INT(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `#__jea_demandes_properties`
+--
+
+CREATE TABLE IF NOT EXISTS `#__jea_demandes_properties` (
+  `id` int(11) NOT NULL,
+  `demande_id` int(11) NOT NULL,
+  `property_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table schema `#__jea_departments`
 -- 
 
@@ -167,6 +235,22 @@ INSERT INTO `#__jea_tools` (`id` , `title` , `link` , `icon` , `params` , `acces
 VALUES 
 ('1', 'com_jea_import_from_jea', 'index.php?option=com_jea&view=import&layout=jea', 'com_jea/header/icon-48-import.png', '', '[''core.manage'', ''com_jea'', ''core.create'', ''com_jea'']'),
 ('2', 'com_jea_import_from_csv', 'index.php?option=com_jea&view=import&layout=csv', 'com_jea/header/icon-48-import.png', '', '[''core.manage'', ''com_jea'', ''core.create'', ''com_jea'']');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `#__jea_suivi`
+--
+
+CREATE TABLE IF NOT EXISTS `#__jea_suivi` (
+  `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `type_action` int(11) NOT NULL,
+  `id_contact` int(11) NOT NULL,
+  `id_property` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

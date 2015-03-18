@@ -132,117 +132,165 @@ class JeaControllerProperty extends JControllerForm
         return $model;
     }
 
-    /**
-     * Envoi d'un mail au propriétaire du bien
-     */         
-     public function sendMailOwner()
-     {
-      $app = JFactory::getApplication();
-      $returnurl = base64_decode($app->input->get('propertyURL', null, 'string'));
-      
-      if (!JSession::checkToken()) {
-        return $this->setRedirect($returnurl);
-      }
-      
-      $nom = $app->input->get('nom', null, 'string');
-      $prenom = $app->input->get('prenom', null, 'string');
-      $telephone = $app->input->get('telephone', null, 'string');
-      $email = $app->input->get('email', null, 'string');
-      $message = $app->input->get('message', null, 'string');
-      $id_annonce = $app->input->get('id_annonce', null, 'int');
-                  
-      if ( empty($nom) )
-      {
-        $app->enqueueMessage('Vous devez entrer votre nom', 'error');
-        return $this->setRedirect($returnurl);
-      }
-      else if ( empty($prenom) )
-      {
-        $app->enqueueMessage('Vous devez entrer votre prénom', 'error');
-        return $this->setRedirect($returnurl);
-      }
-      else if ( empty($telephone) )
-      {
-        $app->enqueueMessage('Vous devez entrer votre numéro de téléphone', 'error');
-        return $this->setRedirect($returnurl);
-      }
-      else if ( empty($email))
-      {
-        $app->enqueueMessage('Vous devez entrer votre email', 'error');
-        return $this->setRedirect($returnurl);
-      }
-      else if ( empty($message) )
-      {
-        $app->enqueueMessage('Vous devez entrer un message', 'error');
-        return $this->setRedirect($returnurl);
-      }
-      
-      // On charge les détails de l'annonce
-      $db = JFactory::getDBO();
-      $query = "SELECT p.* FROM #__jea_properties AS p WHERE p.id={$id_annonce}";
-      $db->setQuery($query);
-      $result = $db->loadObject();
-      
-      // On récupére les contacts associés à l'annonce
-      $query = "SELECT c.* FROM #__jea_contacts_rel AS crel INNER JOIN #__jea_contacts AS c ON c.id=crel.contact_id WHERE crel.property_id={$id_annonce} AND c.type=0";
-      $db->setQuery($query);
-      $contacts = $db->loadObject();
-      
-      if(!empty($contacts))
-      {
-        // Préparation pour l'envoi du mail
-        $mailer = JFactory::getMailer();
-        
-        $config = JFactory::getConfig();
-        $sender = array( 
-          $config->getValue( 'config.mailfrom' ),
-          $config->getValue( 'config.fromname' )
-        );
-     
-        $date = JFactory::getDate();
-        
-        $slug = $result->alias ? ($result->id . ':' . $result->alias) : $result->id;
-        
-        $mailer->setSender($sender);
-        
-        $mailer->addRecipient('florian.dalfitto@gmail.com');
-        $mailer->setSubject('Bourse immobilière demande d\'informations sur une annonce');
-        $mailer->isHTML(true);
-        $mailer->setBody(
-          'Vous avez reçu une demande d\information depuis la Bourse immobilière du site de la Communauté de Communes du Pays de Faverges (http://pays-de-faverges.com/).
-          La demande d\'informations concerne l\'annonce nommée <b>'.$result->title.'</b> portant la référence <b>'.$result->ref.'</b><br />
-          <a href="'.JRoute::_('index.php?option=com_jea&view=property&id='. $slug, false).'" title="Lien vers l\'annonce du bien">Lien vers l\'annonce du bien en question</a><br />
-          Détails des informations données par la personne demandeuse : <br />
-          <ul>
-          <li>Nom : '.$nom.'</li>
-          <li>Prénom : '.$prenom.'</li>
-          <li>Numéro de téléphone : '.$telephone.'</li>
-          <li>Adresse mail : '.$email.'</li>
-          <li>Message : '.$message.' </li></ul>');
-        
-                    
-        try
-        {
-          $mailer->Send();
-          $app->enqueueMessage(JText::_('COM_JEA_MORE_INFO_ANNOUNCE_SEND_SUCCESSFULLY'), 'message');
-        }
-        catch (Exception $e)
-        {      
-          $app->enqueueMessage($e->getMessage(), 'error'); 
-        }
-              
-        $this->setRedirect($returnurl);
-      }
-      else
-      {
-        $app->enqueueMessage('Impossible d\'envoyer le mail au propriétaire du bien', 'error');
-        $this->setRedirect($returnurl);
-      }       
-     }     
+	/**
+	 * Envoi d'un mail au propriÃ©taire du bien
+	*/
+	public function sendMailOwner()
+	{
+		$app = JFactory::getApplication();
+		$returnurl = base64_decode($app->input->get('propertyURL', null, 'string'));
+
+		if (!JSession::checkToken()) {
+			return $this->setRedirect($returnurl);
+		}
+
+		$nom = $app->input->get('nom', null, 'string');
+		$prenom = $app->input->get('prenom', null, 'string');
+		$telephone = $app->input->get('telephone', null, 'string');
+		$email = $app->input->get('email', null, 'string');
+		$message = $app->input->get('message', null, 'string');
+		$id_annonce = $app->input->get('id_annonce', null, 'int');
+
+		if ( empty($nom) )
+		{
+			$app->enqueueMessage('Vous devez entrer votre nom', 'error');
+			return $this->setRedirect($returnurl);
+		}
+		else if ( empty($prenom) )
+		{
+			$app->enqueueMessage('Vous devez entrer votre prï¿½nom', 'error');
+			return $this->setRedirect($returnurl);
+		}
+		else if ( empty($telephone) )
+		{
+			$app->enqueueMessage('Vous devez entrer votre numï¿½ro de tï¿½lï¿½phone', 'error');
+			return $this->setRedirect($returnurl);
+		}
+		else if ( empty($email))
+		{
+			$app->enqueueMessage('Vous devez entrer votre email', 'error');
+			return $this->setRedirect($returnurl);
+		}
+		else if ( empty($message) )
+		{
+			$app->enqueueMessage('Vous devez entrer un message', 'error');
+			return $this->setRedirect($returnurl);
+		}
+
+		// On charge les dÃ©tails de l'annonce
+		$db = JFactory::getDBO();
+		$query = "SELECT p.* FROM #__jea_properties AS p WHERE p.id={$id_annonce}";
+		$db->setQuery($query);
+		$result = $db->loadObject();
+
+		// On rï¿½cupï¿½re les contacts associï¿½s ï¿½ l'annonce
+		/*$query = "SELECT c.* FROM #__jea_contacts_rel AS crel INNER JOIN #__jea_contacts AS c ON c.id=crel.contact_id WHERE crel.property_id={$id_annonce} AND c.type=0";
+		$db->setQuery($query);
+		$contacts = $db->loadObject();*/
+
+		// PrÃ©paration pour l'envoi du mail
+		$mailer = JFactory::getMailer();
+
+		$config = JFactory::getConfig();
+		$sender = array(
+			$config->getValue( 'config.mailfrom' ),
+			$config->getValue( 'config.fromname' )
+		);
+
+		$date = JFactory::getDate();
+
+		$slug = $result->alias ? ($result->id . ':' . $result->alias) : $result->id;
+
+		$mailer->setSender($sender);
+
+		$mailer->addRecipient('test@gmail.com');
+		$mailer->setSubject('Bourse immobiliÃ©re demande d\'informations sur une annonce');
+		$mailer->isHTML(true);
+		$mailer->setBody(
+			'Vous avez reÃ§u une demande d\information depuis la Bourse immobiliÃ©re du site de la CommunautÃ© de Communes du Pays de Faverges (http://pays-de-faverges.com/).
+			La demande d\'informations concerne l\'annonce nommÃ©e <b>'.$result->title.'</b> portant la rÃ©fÃ©rence <b>'.$result->ref.'</b><br />
+			<a href="'.JRoute::_('index.php?option=com_jea&view=property&id='. $slug, false).'" title="Lien vers l\'annonce du bien">Lien vers l\'annonce du bien en question</a><br />
+			DÃ©tails des informations donnÃ©es par la personne demandeuse : <br />
+			<ul>
+			<li>Nom : '.$nom.'</li>
+			<li>PrÃ©nom : '.$prenom.'</li>
+			<li>NumÃ©ro de tÃ©lÃ©phone : '.$telephone.'</li>
+			<li>Adresse mail : '.$email.'</li>
+			<li>Message : '.$message.' </li></ul>');
+
+		try
+		{
+			$mailer->Send();
+			$app->enqueueMessage(JText::_('COM_JEA_MORE_INFO_ANNOUNCE_SEND_SUCCESSFULLY'), 'message');
+		}
+		catch (Exception $e)
+		{
+			$app->enqueueMessage($e->getMessage(), 'error');
+		}
+
+		// On envoie un mail au service Ã©conomique
+		$mailer->addRecipient('service.economique@mail.com');
+		$mailer->setSubject('Bourse immobiliÃ¨re envoi d\'une demande');
+		$mailer->isHTML(true);
+		$mailer->setBody(
+			'Une nouvelle demande d\'informations a Ã©tÃ© faite sur l\'annonce nommÃ©e <b>'.$result->title.'</b> portant la rÃ©fÃ©rence <b>'.$result->ref.'</b><br />
+			<a href="'.JRoute::_('index.php?option=com_jea&view=property&id='. $slug, false).'" title="Lien vers l\'annonce du bien">Lien vers l\'annonce du bien en question</a><br />
+			DÃ©tails des informations donnÃ©es par la personne demandeuse : <br />
+			<ul>
+			<li>Nom : '.$nom.'</li>
+			<li>PrÃ©nom : '.$prenom.'</li>
+			<li>NumÃ©ro de tÃ©lÃ©phone : '.$telephone.'</li>
+			<li>Adresse mail : '.$email.'</li>
+			<li>Message : '.$message.' </li></ul>');
+
+		try
+		{
+			//$mailer->Send();
+			$app->enqueueMessage(JText::_('COM_JEA_MORE_INFO_ANNOUNCE_SEND_SUCCESSFULLY'), 'message');
+		}
+		catch (Exception $e)
+		{
+			$app->enqueueMessage($e->getMessage(), 'error');
+		}
+
+		$this->insertDemande($nom, $prenom, $email, $telephone, $message, $id_annonce);
+
+		$app->enqueueMessage('Votre demande a bien Ã©tÃ© envoyÃ©e');
+
+		$this->setRedirect($returnurl);
+	}
+
+	/**
+	 * Insertion de la demande into database
+	*/
+	protected function insertDemande($nom, $prenom, $email, $telephone, $message, $property_id)
+	{
+		$db = JFactory::getDBO();
+
+		$date = JFactory::getDate();
+
+		// Modifier la base de donnÃ©e et la requÃªte pour mettre nom du contact, prÃ©nom et date de demande
+		$query = "INSERT INTO #__jea_demandes (nom_contact, prenom_contact, adresse_mail_contact, telephone_contact, description, date_demande)
+		VALUES({$db->quote($nom)},
+		{$db->quote($prenom)},
+		{$db->quote($email)},
+		{$db->quote($telephone)},
+		{$db->quote($message)},
+		{$db->quote($date->toSql())},
+		1);";
+		$db->setQuery($query);
+		$db->query();
+
+		$demande_id = $db->insertid();
+
+		$query = "INSERT INTO #__jea_demandes_properties (demande_id, property_id) VALUES ($demande_id,$property_id)";
+		$db->setQuery($query);
+		$db->query();
+	}
 
     /**
      * Envoi du mail pour plus d'information sur une annonce
-     */         
+     */
     public function sendMailContact()
     {
       $input = JFactory::getApplication()->input;
@@ -251,51 +299,51 @@ class JeaControllerProperty extends JControllerForm
       $telephone = $input->get('telephone', null, 'string');
       $sujet = $input->get('subject', null, 'string');
       $message = $input->get('message', null, 'string');
-      
+
       $returnurl = base64_decode($input->get('propertyURL', null, 'string'));
-                  
+
       if (!JSession::checkToken()) {
         return $this->setRedirect($returnurl);
       }
-      
-      // L'utilisateur doit compléter son nom, email, sujet et message sinon on le renvoie à la page précédente
+
+      // L'utilisateur doit complï¿½ter son nom, email, sujet et message sinon on le renvoie ï¿½ la page prï¿½cï¿½dente
       if ( empty($nom) && empty($email) && empty($telephone) && empty($sujet) && empty($message) ) {
-        JFactory::getApplication()->enqueueMessage('Vous devez compléter tous les champs pour que le message soit envoyé', 'error');
-        
+        JFactory::getApplication()->enqueueMessage('Vous devez complÃ©ter tous les champs pour que le message soit envoyï¿½', 'error');
+
         return $this->setRedirect($returnurl);
       }
-      
-      // Préparation pour l'envoi du mail
+
+      // Prï¿½paration pour l'envoi du mail
       $mailer = JFactory::getMailer();
-      
+
       $config = JFactory::getConfig();
-      $sender = array( 
+      $sender = array(
         $config->getValue( 'config.mailfrom' ),
         $config->getValue( 'config.fromname' )
       );
-   
+
       $date = JFactory::getDate();
-   
+
       $mailer->setSender($sender);
-      
-      $mailer->addRecipient('florian.dalfitto@gmail.com');
-      $mailer->setSubject('[Gestion immobilière demande informations] '.$sujet);
+
+      $mailer->addRecipient('monemail@mail.com');
+      $mailer->setSubject('[Gestion immobiliÃ©re demande informations] '.$sujet);
       $mailer->isHTML(true);
       $mailer->setBody(
-        'Detail du message: '.$message.' <br /><br /><b>Annonce 
-        déposée le: </b>'.$date->format('d-m-Y').'<br /><br /><b>Coordonnées
-         du déposant:</b> <br />'.$nom.' <br />'.$telephone.' <br />'.$email);
-          
+        'Detail du message: '.$message.' <br /><br /><b>Annonce
+		dï¿½posï¿½e le: </b>'.$date->format('d-m-Y').'<br /><br /><b>Coordonnï¿½es
+         du dï¿½posant:</b> <br />'.$nom.' <br />'.$telephone.' <br />'.$email);
+
       try
       {
         $mailer->Send();
         JFactory::getApplication()->enqueueMessage(JText::_('COM_JEA_MORE_INFO_ANNOUNCE_SEND_SUCCESSFULLY'), 'message');
       }
       catch (Exception $e)
-      {      
-        JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error'); 
+      {
+        JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
       }
-            
+
       $this->setRedirect($returnurl);
     }
 
