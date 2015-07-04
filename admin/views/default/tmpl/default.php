@@ -63,7 +63,7 @@ JHtml::stylesheet('media/com_jea/css/jea.admin.css');
 <div id="pan2">
   <div class="file_reader">
     <pre>
-    <?php require JPATH_COMPONENT . '/LICENCE.txt' ?>
+    <?php //require JPATH_COMPONENT . '/LICENCE.txt' ?>
     </pre>
   </div>
 </div>
@@ -72,7 +72,7 @@ JHtml::stylesheet('media/com_jea/css/jea.admin.css');
 <div id="pan3">
   <div class="file_reader">
     <pre>
-    <?php require JPATH_COMPONENT . '/NEWS.txt' ?>
+    <?php //require JPATH_COMPONENT . '/NEWS.txt' ?>
     </pre>
   </div>
 </div>

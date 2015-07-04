@@ -49,19 +49,26 @@ class JeaViewSuivi extends JViewLegacy
           $property_id_list[] = $suivi->id_property;
         }
 
-        $contact_id_list = implode(',',$contact_id_list);
-
         $db = JFactory::getDBO();
-        $query = "SELECT * FROM #__jea_contacts WHERE id IN ({$contact_id_list})";
-        $db->setQuery($query);
-        $this->contacts_objects = $db->loadObjectList('id');
 
-        // Get properties name
-        $property_id_list = implode(',',$property_id_list);
+		if (!empty($contact_id_list))
+		{
+			$contact_id_list = implode(',',$contact_id_list);
 
-        $query = "SELECT * FROM #__jea_properties WHERE id IN ({$property_id_list})";
-        $db->setQuery($query);
-        $this->properties_objects = $db->loadObjectList('id');
+			$query = "SELECT * FROM #__jea_contacts WHERE id IN ({$contact_id_list})";
+			$db->setQuery($query);
+			$this->contacts_objects = $db->loadObjectList('id');
+		}
+
+		// Get properties name
+		if (!empty($property_id_list))
+		{
+			$property_id_list = implode(',',$property_id_list);
+
+			$query = "SELECT * FROM #__jea_properties WHERE id IN ({$property_id_list})";
+			$db->setQuery($query);
+			$this->properties_objects = $db->loadObjectList('id');
+		}
 
         if ((float) JVERSION > 3) {
             $this->sidebar = JHtmlSidebar::render();

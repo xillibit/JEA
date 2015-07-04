@@ -208,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `#__jea_properties` (
   `longitude` varchar(20) NOT NULL default '0',
   `notes` TEXT NOT NULL,
   `language` char(7) NOT NULL COMMENT 'language where property is shown',
+  `contact_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `idx_jea_transactiontype` (`transaction_type`),
   KEY `idx_jea_typeid` (`type_id`),
