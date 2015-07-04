@@ -59,6 +59,9 @@
 			<menu img="icon" view="properties">com_jea_properties</menu>
 			<menu img="icon" view="features">com_jea_features</menu>
 			<menu img="icon" view="tools">com_jea_tools</menu>
+			<menu img="icon" view="demandes">com_jea_demandes</menu>
+			<menu img="icon" view="contacts">com_jea_contacts</menu>
+			<menu img="icon" view="suivi">com_jea_suivi</menu>
 		</submenu>
 
 		<files folder="admin">
